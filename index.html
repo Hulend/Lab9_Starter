@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "ebcbf7c77d504eebbbfe4acadcb308a0"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +110,87 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns[0].addEventListener('click',() => {
+      console.log("Hello World!");
+    });
+    errorBtns[1].addEventListener('click',() => {
+      console.error("ERROR 404 NOT FOUND");
+    });
+    errorBtns[2].addEventListener('click',() => {
+      console.count('Sheep');
+      console.count('Sheep');
+      console.count('Black Sheep');
+      console.count('Sheep');
+    });
+    errorBtns[3].addEventListener('click',() => {
+      console.warn("Button not implemented, please contact network supervisor.");
+    });
+    errorBtns[4].addEventListener('click',() => {
+      console.assert(2 == 1, '2 equals 1 when b = a + b');
+    });
+    errorBtns[5].addEventListener('click',() => {
+      console.clear();
+    });
+    errorBtns[6].addEventListener('click',() => {
+      console.dir(document.head);
+    });
+    errorBtns[7].addEventListener('click',() => {
+      console.dirxml(document);
+    });
+    errorBtns[8].addEventListener('click',() => {
+      console.group('Group Start');
+    });
+    errorBtns[9].addEventListener('click',() => {
+      console.groupEnd('Group Start');
+    });
+    errorBtns[10].addEventListener('click',() => {
+      let table = [{1:'Apple',2:'Banana'}, {1:'Potato',2:'Tomato'}];
+      console.table(table);
+    });
+    errorBtns[11].addEventListener('click',() => {
+      console.time('Clock');
+    });
+    errorBtns[12].addEventListener('click',() => {
+      console.timeEnd('Clock');
+    });
+    errorBtns[13].addEventListener('click',() => {
+      const trace = () => {trace2()};
+      const trace2 = () => {trace3()};
+      const trace3 = () => {console.trace()};
+      trace();
+    });
+    errorBtns[14].addEventListener('click',() => {
+      let operation = 'success';
+      let sumNum, num = -2;
+      try {
+        if(num > 0) {
+          sumNum = num;
+        } else {
+          throw new natOOBError(num);
+        }
+      } catch(e) {
+        console.error(e);
+        operation = 'failure'
+        throw(e);
+      } finally {
+        console.info('Operation: ' + operation);
+      }
+    });
+    
+    window.onerror = function (msg, url, lineNo) {
+      alert('JavaScript error: ' + msg + ' on line ' + lineNo + ' for ' + url);
+      console.error("Oopsies");
+      return true; // browser doesn't need to handle error anymore.
+    }
+
+    class natOOBError extends Error {
+      constructor(number) {
+        super(number + ' is not a natural number.');
+        this.name = 'natOOBError';
+      }
+    }
+
+    TrackJS.track('Testing TrackJS!');
   </script>
 </body>
 
